@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   vote:
@@ -52,4 +52,6 @@ volumes:
 
 networks:
   front-tier:
+    name: front-tier
   back-tier:
+    name: back-tier
