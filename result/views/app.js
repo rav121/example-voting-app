@@ -1,5 +1,11 @@
 var app = angular.module('catsvsdogs', []);
-var socket = io.connect({transports:['polling']});
+
+var path = (window.location.pathname);
+if (path.charAt(path.length - 1) !== '/')
+  path += '/';
+path += 'socket.io/';
+
+var socket = io.connect({transports:['polling'], path: path});
 
 var bg1 = document.getElementById('background-stats-1');
 var bg2 = document.getElementById('background-stats-2');
