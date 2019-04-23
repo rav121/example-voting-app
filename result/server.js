@@ -9,6 +9,9 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server);
 
+var OPTION_A = process.env.OPTION_A || "Cats";
+var OPTION_B = process.env.OPTION_B || "Dogs";
+
 io.set('transports', ['polling']);
 
 var port = process.env.PORT || 4000;
@@ -16,6 +19,7 @@ var port = process.env.PORT || 4000;
 io.sockets.on('connection', function (socket) {
 
   socket.emit('message', { text : 'Welcome!' });
+  socket.emit('options', { optionA: OPTION_A, optionB: OPTION_B });
 
   socket.on('subscribe', function (data) {
     socket.join(data.channel);

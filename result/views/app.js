@@ -13,8 +13,17 @@ var bg2 = document.getElementById('background-stats-2');
 app.controller('statsCtrl', function($scope){
   $scope.aPercent = 50;
   $scope.bPercent = 50;
+  $scope.optionA = "";
+  $scope.optionB = "";
 
   var updateScores = function(){
+    socket.on('options', function(data) {
+      $scope.optionA = data.optionA;
+      $scope.optionB = data.optionB;
+
+      document.title = data.optionA + " vs " + data.optionB + " -- Results";
+    });
+
     socket.on('scores', function (json) {
        data = JSON.parse(json);
        var a = parseInt(data.a || 0);
